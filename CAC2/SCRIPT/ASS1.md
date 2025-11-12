@@ -94,6 +94,66 @@ df['datetime'] = df.apply(lambda row: row['Date'] + pd.Timedelta(hours=row['Hour
 # Display the first few rows of the combined DataFrame
 print("Combined DataFrame head:")
 display(df.head())
+![1](images/1.png)
+1. Daily Bike Demand over Time
+This plot shows how the total rented bike count changes over time, helping to identify overall trends or significant events.
 
+# Group by datetime and sum Rented Bike Count for a smoother time series plot
+daily_bike_demand = df.groupby('datetime')['Rented Bike Count'].sum().reset_index()
 
+```python
+plt.figure(figsize=(15, 6))
+sns.lineplot(x='datetime', y='Rented Bike Count', data=daily_bike_demand)
+plt.title('Daily Rented Bike Count Over Time')
+plt.xlabel('Date and Time')
+plt.ylabel('Total Rented Bike Count')
+plt.grid(True)
+plt.show()
+
+IMAGE
+
+2. Hourly Bike Demand
+This plot illustrates the average number of bikes rented per hour, revealing daily patterns and peak rental times.
+
+```python
+hourly_avg_demand = df.groupby('Hour')['Rented Bike Count'].mean().reset_index()
+
+plt.figure(figsize=(12, 6))
+sns.barplot(x='Hour', y='Rented Bike Count', data=hourly_avg_demand, hue='Hour', palette='viridis', legend=False)
+plt.title('Average Rented Bike Count by Hour of Day')
+plt.xlabel('Hour of Day')
+plt.ylabel('Average Rented Bike Count')
+plt.xticks(range(0, 24)) # Ensure all hours are displayed
+plt.grid(axis='y')
+plt.show()
+
+ IMAGE
+
+3. Bike Demand by Temperature
+This scatter plot helps to understand how temperature influences the number of rented bikes
+
+```python
+plt.figure(figsize=(12, 7))
+sns.scatterplot(x='Temperature', y='Rented Bike Count', data=df, alpha=0.6)
+plt.title('Rented Bike Count vs. Temperature')
+plt.xlabel('Temperature (Celsius)')
+plt.ylabel('Rented Bike Count')
+plt.grid(True)
+plt.show()
+
+IMAGE
+
+4. Bike Demand by Seasons
+This box plot visualizes the distribution of Rented Bike Count for each Season, showing seasonal variations in demand.
+
+```python
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='Seasons', y='Rented Bike Count', data=df, hue='Seasons', palette='pastel', legend=False)
+plt.title('Rented Bike Count by Seasons')
+plt.xlabel('Season')
+plt.ylabel('Rented Bike Count')
+plt.grid(axis='y')
+plt.show()
+
+IMAGE
 
