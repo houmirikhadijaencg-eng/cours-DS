@@ -94,7 +94,9 @@ df['datetime'] = df.apply(lambda row: row['Date'] + pd.Timedelta(hours=row['Hour
 # Display the first few rows of the combined DataFrame
 print("Combined DataFrame head:")
 display(df.head())
-![1](images/1.png)
+```
+![1](1.png)
+
 1. Daily Bike Demand over Time
 This plot shows how the total rented bike count changes over time, helping to identify overall trends or significant events.
 
@@ -109,8 +111,9 @@ plt.xlabel('Date and Time')
 plt.ylabel('Total Rented Bike Count')
 plt.grid(True)
 plt.show()
+```
 
-IMAGE
+![2](2.jpg)
 
 2. Hourly Bike Demand
 This plot illustrates the average number of bikes rented per hour, revealing daily patterns and peak rental times.
@@ -126,8 +129,8 @@ plt.ylabel('Average Rented Bike Count')
 plt.xticks(range(0, 24)) # Ensure all hours are displayed
 plt.grid(axis='y')
 plt.show()
-
- IMAGE
+```
+![ 3 ](3.jpg)
 
 3. Bike Demand by Temperature
 This scatter plot helps to understand how temperature influences the number of rented bikes
@@ -140,8 +143,8 @@ plt.xlabel('Temperature (Celsius)')
 plt.ylabel('Rented Bike Count')
 plt.grid(True)
 plt.show()
-
-IMAGE
+```
+![ 4 ](4.jpg)
 
 4. Bike Demand by Seasons
 This box plot visualizes the distribution of Rented Bike Count for each Season, showing seasonal variations in demand.
@@ -154,6 +157,6 @@ plt.xlabel('Season')
 plt.ylabel('Rented Bike Count')
 plt.grid(axis='y')
 plt.show()
-
-IMAGE
+```
+![ 5 ](5.jpg)
 
