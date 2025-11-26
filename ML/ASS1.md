@@ -16,147 +16,308 @@ La base de données à laquelle tu fais référence, **"Seoul Bike Sharing Deman
 
 ***
 
-# Présentation de la base "Seoul Bike Sharing Demand"
+Voici une **présentation détaillée** du lien que tu as envoyé — le jeu de données Wine Quality hébergé sur UCI Machine Learning Repository. ([archive.ics.uci.edu][1])
 
-## Description principale
-Ce dataset contient le nombre de vélos en libre-service loués par heure dans la ville de Séoul, avec des données météorologiques associées ainsi que des informations sur les jours fériés.[4]
+---
 
-## Objectif
-Son but principal est la **prédiction du nombre de vélos loués** à chaque heure de la journée, ce qui facilite la gestion et la disponibilité des vélos pour répondre à la demande.[4]
+## 🍷 Qu’est-ce que le dataset « Wine Quality »
 
-## Caractéristiques clés
-- **Type de problème** : Régression, c’est-à-dire prédire une valeur numérique (nombre de vélos loués).[4]
-- **Nombre d’instances** : 8 760 (correspondant à une année entière, 365 jours x 24 heures).[4]
-- **Nombre de variables** : 13 principales, y compris des données temporelles, météorologiques et autres facteurs contextuels qui influencent la demande.[4]
+* Le dataset Wine Quality regroupe deux jeux de données distincts, l’un pour des vins rouges, l’autre pour des vins blancs — des échantillons de vins « Vinho Verde » du nord du Portugal. ([archive.ics.uci.edu][1])
+* L’objectif principal : **modéliser la qualité du vin** à partir de tests physico-chimiques (variables d’entrée) pour prédire ou expliquer la qualité perçue (variable de sortie). ([archive.ics.uci.edu][1])
+* Ce dataset est souvent utilisé dans des contextes d’**apprentissage automatique** pour des tâches de **régression** (prédire la note de qualité) ou de **classification** (qualifier un vin comme « bon / médiocre », etc.). ([uci-ics-mlr-prod.aws.uci.edu][2])
 
-## Variables principales
-| Variable                     | Rôle        | Type                          | Description                                              |
-|------------------------------|------------|------------------------------|----------------------------------------------------------|
-| Date                         | Feature    | Date                          | La date exacte de mesure                                 |
-| Rented Bike Count            | Target     | Integer                       | Nombre de vélos loués durant cette heure               |
-| Hour                         | Feature    | Integer (0-23)                | Heure de la journée                                      |
-| Temperature                  | Feature    | Continu (°C)                   | Température extérieure                                   |
-| Humidity                     | Feature    | Integer (%)                   | Humidité relative                                        |
-| Wind speed                   | Feature    | Continu (m/s)                   | Vitesse du vent                                         |
-| Visibility                   | Feature    | Integer (10m)                   | Visibilité (en multiples de 10 mètres)                |
-| Dew point temperature        | Feature    | Continu (°C)                   | Température du point de rosée                            |
-| Solar Radiation              | Feature    | Continu (MJ/m2)                | Radiation solaire                                       |
-| Rainfall                     | Feature    | Integer (mm)                   | Précipitations en millimètres                          |
-| Snowfall                     | Feature    | Integer (cm)                   | Chute de neige (cm)                                      |
-| Seasons                      | Feature    | Categorical (hiver, printemps, été, automne) | Saison de l’année                        |
-| Holiday                      | Feature    | Binary                        | Indique si c’est un jour férié                          |
+---
 
-## Particularités
-- Pas de valeurs manquantes.
-- Le dataset est riche pour modéliser la demande en vélos en fonction des conditions météo, de la saison, du jour de la semaine ou d’événements spéciaux.[4]
+## 📊 Contenu du dataset — variables & structure
 
-## Formats et fichiers disponibles
-- Principalement un fichier CSV nommé `SeoulBikeData.csv` d’environ 590 Ko.[4]
+Chaque échantillon (chaque vin) est décrit par un ensemble de **caractéristiques physico-chimiques** (entrée) et une **note de qualité** (sortie). ([archive.ics.uci.edu][1])
 
-## Utilisation typique
-Ce dataset est adapté pour **l’apprentissage supervisé par la régression**, notamment pour modéliser et prévoir la demande horaire de vélos dans un contexte urbain intelligent.
+### Variables explicatives (features) — 11 caractéristiques
 
-***
+| Variable             | Description / rôle                                                                        |
+| -------------------- | ----------------------------------------------------------------------------------------- |
+| fixed_acidity        | Acidité fixe (acidité totale non volatile) ([archive.ics.uci.edu][1])                     |
+| volatile_acidity     | Acidité volatile (acides volatils) ([archive.ics.uci.edu][1])                             |
+| citric_acid          | Acidité citrique ([archive.ics.uci.edu][1])                                               |
+| residual_sugar       | Sucre résiduel (quantité de sucres restants) ([archive.ics.uci.edu][1])                   |
+| chlorides            | Taux de chlorures ([archive.ics.uci.edu][1])                                              |
+| free_sulfur_dioxide  | Dioxyde de soufre libre (libre SO₂) ([archive.ics.uci.edu][1])                            |
+| total_sulfur_dioxide | Dioxyde de soufre total (libre + combiné) ([archive.ics.uci.edu][1])                      |
+| density              | Densité du vin ([archive.ics.uci.edu][1])                                                 |
+| pH                   | pH du vin (acidité/ alcalinité) ([archive.ics.uci.edu][1])                                |
+| sulphates            | Sulfates (composés chimiques influençant goût et conservation) ([archive.ics.uci.edu][1]) |
+| alcohol              | Taux d’alcool (en pourcentage) ([archive.ics.uci.edu][1])                                 |
 
-# Ressources complémentaires
-Le dataset est accessible gratuitement, sous licence Creative Commons Attribution 4.0 International (CC BY 4.0), ce qui permet de le partager, de le modifier en donnant crédit à l’auteur.[4]
+### Variable cible (target) — qualité
 
-**Code Python - Statistiques descriptives :**
+* `quality`: une note (score) généralement entre 0 et 10 attribuée au vin selon des **critiques d’experts** (goûteurs), qui jugent des aspects sensoriels (goût, arôme, équilibre, etc.). ([archive.ics.uci.edu][1])
+* Le dataset ne contient **pas** d’informations sur le type de raisin, la marque du vin, le prix ou le millésime — uniquement des données chimiques + la note sensorielle. ([archive.ics.uci.edu][1])
 
-```python
-from ucimlrepo import fetch_ucirepo 
-  
-# fetch dataset 
-seoul_bike_sharing_demand = fetch_ucirepo(id=560) 
-  
-# data (as pandas dataframes) 
-X = seoul_bike_sharing_demand.data.features 
-y = seoul_bike_sharing_demand.data.targets 
-  
-# metadata 
-print(seoul_bike_sharing_demand.metadata) 
-  
-# variable information 
-print(seoul_bike_sharing_demand.variables)
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+### Taille & format
 
-# Combine features (X) and target (y) into a single DataFrame
-df = pd.concat([X, y], axis=1)
+* Environ **4 898 instances** (échantillons) au total. ([archive.ics.uci.edu][1])
+* Données numériques continues pour les variables d’entrée. ([archive.ics.uci.edu][1])
+* Pas de valeurs manquantes (dataset « clean »). ([archive.ics.uci.edu][1])
 
-# Convert 'Date' column to datetime objects
-df['Date'] = pd.to_datetime(df['Date'], format='%d/%m/%Y')
+---
 
-# Create a 'datetime' column by combining 'Date' and 'Hour'
-df['datetime'] = df.apply(lambda row: row['Date'] + pd.Timedelta(hours=row['Hour']), axis=1)
+## 🎓 Usage & intérêt
 
-# Display the first few rows of the combined DataFrame
-print("Combined DataFrame head:")
-display(df.head())
-```
-![1](1.png)
+Pourquoi ce dataset est populaire :
 
-1. Daily Bike Demand over Time
-This plot shows how the total rented bike count changes over time, helping to identify overall trends or significant events.
+* Il permet d’explorer l’influence des caractéristiques chimiques d’un vin sur la qualité perçue — utile en œnologie, data science, apprentissage machine.
+* Il est simple, bien documenté et assez réaliste pour constituer un **bon cas d’étude** (régression ou classification).
+* Il sert de **référence pour expérimenter** des techniques de pré-traitement (normalisation, sélection de variables), modélisation (régression, kNN, forêts aléatoires, etc.), évaluation de performance.
+* Permet aussi d’analyser la **corrélation entre variables chimiques** et qualité, d’identifier les variables les plus importantes, etc.
 
-# Group by datetime and sum Rented Bike Count for a smoother time series plot
-daily_bike_demand = df.groupby('datetime')['Rented Bike Count'].sum().reset_index()
+---
 
-```python
-plt.figure(figsize=(15, 6))
-sns.lineplot(x='datetime', y='Rented Bike Count', data=daily_bike_demand)
-plt.title('Daily Rented Bike Count Over Time')
-plt.xlabel('Date and Time')
-plt.ylabel('Total Rented Bike Count')
-plt.grid(True)
-plt.show()
+## 📚 Informations & provenance
+
+* Créé par Paulo Cortez, A. Cerdeira, F. Almeida, Telmo Matos & J. Reis, en 2009. ([archive.ics.uci.edu][1])
+* DOI associé : 10.24432/C56S3T. ([archive.ics.uci.edu][1])
+* Licence : Creative Commons Attribution 4.0 International (CC BY 4.0) — utilisation libre avec attribution. ([archive.ics.uci.edu][1])
+
+---
+
+## 🧠 Possibilités d’exploitation typiques
+
+Voici quelques exemples de ce qu’on peut faire avec ce dataset :
+
+* **Classification** : par exemple, transformer la note quality en « bon / moyen / mauvais » et construire un classifieur.
+* **Régression** : prédire la note de qualité telle quelle (score 0–10) à partir des caractéristiques chimiques.
+* **Analyse exploratoire** : corrélations, visualisations (boxplots, scatterplots) pour identifier les variables influentes.
+* **Sélection de variables / ingénierie de features** : déterminer quelles caractéristiques chimiques sont réellement pertinentes.
+* **Prétraitements + normalisation** pour améliorer les performances des modèles sensibles aux échelles.
+
+---
+Voici une **description claire, précise et structurée de chaque partie** de votre fichier **TP_ml.ipynb**, cellule par cellule, en suivant exactement l’ordre du notebook.
+
+---
+
+# ✅ **DESCRIPTION DÉTAILLÉE DE CHAQUE PARTIE DU FICHIER *TP_ml.ipynb***
+
+---
+
+## **🟦 Partie 1 — Installation de la bibliothèque**
+
+### 🔢 Cellule :
+
+```markdown
+Install the ucimlrepo package
 ```
 
-![2](2.jpg)
+Vous indiquez que vous allez installer une bibliothèque nécessaire pour charger le dataset depuis UCI.
 
-2. Hourly Bike Demand
-This plot illustrates the average number of bikes rented per hour, revealing daily patterns and peak rental times.
-
-```python
-hourly_avg_demand = df.groupby('Hour')['Rented Bike Count'].mean().reset_index()
-
-plt.figure(figsize=(12, 6))
-sns.barplot(x='Hour', y='Rented Bike Count', data=hourly_avg_demand, hue='Hour', palette='viridis', legend=False)
-plt.title('Average Rented Bike Count by Hour of Day')
-plt.xlabel('Hour of Day')
-plt.ylabel('Average Rented Bike Count')
-plt.xticks(range(0, 24)) # Ensure all hours are displayed
-plt.grid(axis='y')
-plt.show()
-```
-![ 3 ](3.jpg)
-
-3. Bike Demand by Temperature
-This scatter plot helps to understand how temperature influences the number of rented bikes
+### 🔢 Cellule :
 
 ```python
-plt.figure(figsize=(12, 7))
-sns.scatterplot(x='Temperature', y='Rented Bike Count', data=df, alpha=0.6)
-plt.title('Rented Bike Count vs. Temperature')
-plt.xlabel('Temperature (Celsius)')
-plt.ylabel('Rented Bike Count')
-plt.grid(True)
-plt.show()
+!pip install ucimlrepo
 ```
-![ 4 ](4.jpg)
 
-4. Bike Demand by Seasons
-This box plot visualizes the distribution of Rented Bike Count for each Season, showing seasonal variations in demand.
+Cette cellule installe **ucimlrepo**, une bibliothèque permettant d’accéder facilement aux jeux de données de l’UCI Machine Learning Repository.
+
+---
+
+## **🟦 Partie 2 — Importation du dataset Wine Quality**
+
+### 🔢 Cellule :
+
+```markdown
+Import the dataset
+```
+
+### 🔢 Cellule :
 
 ```python
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='Seasons', y='Rented Bike Count', data=df, hue='Seasons', palette='pastel', legend=False)
-plt.title('Rented Bike Count by Seasons')
-plt.xlabel('Season')
-plt.ylabel('Rented Bike Count')
-plt.grid(axis='y')
-plt.show()
+from ucimlrepo import fetch_ucirepo
+...
+print(wine_quality.variables)
 ```
-![ 5 ](5.jpg)
+
+Cette partie :
+
+* charge le dataset **Wine Quality** depuis UCI (via son ID),
+* affiche des informations sur les variables (caractéristiques chimiques du vin).
+
+---
+
+## **🟦 Partie 3 — Chargement manuel du dataset**
+
+### 🔢 Cellule :
+
+```markdown
+chargement des données et l'affichage de leur résumé
+```
+
+### 🔢 Cellule :
+
+```python
+df = pd.read_csv(link)
+df.describe()
+df.info()
+df.head()
+```
+
+Ici :
+
+* vous chargez le fichier CSV via un lien Internet,
+* vous affichez :
+
+  * un résumé statistique (`describe()`),
+  * les types et tailles des colonnes (`info()`),
+  * les premières lignes (`head()`).
+
+Objectif : **exploration initiale des données**.
+
+---
+
+## **🟦 Partie 4 — Séparation des données et préparation des variables**
+
+### 🔢 Cellule :
+
+```python
+X = df.drop("quality", axis=1)
+Y = df["quality"]
+print(Y.value_counts())
+```
+
+Cette cellule :
+
+* sépare les données explicatives (**X**) de la cible (**Y**),
+* regarde combien d’échantillons existent pour chaque note de qualité.
+
+---
+
+## **🟦 Partie 5 — Transformation de la cible en classification binaire**
+
+### 🔢 Cellule :
+
+```python
+Y = [0 if val <= 5 else 1 for val in Y]
+```
+
+Transformation du problème initial (prédire une note entre 0 et 10) en un problème **binaire** :
+
+* 0 = vin de mauvaise qualité (≤5)
+* 1 = vin de bonne qualité (≥6)
+
+Très utile pour l’apprentissage supervisé.
+
+---
+
+## **🟦 Partie 6 — Séparation apprentissage / validation**
+
+### 🔢 Cellule :
+
+```python
+Xa, Xv, Ya, Yv = ... (train_test_split)
+```
+
+(Ici le code est partiellement visible mais on comprend la logique.)
+
+Objectif :
+
+* créer un ensemble pour entraîner le modèle (**train**),
+* et un autre pour l’évaluer (**validation**).
+
+---
+
+## **🟦 Partie 7 — Test du modèle kNN pour plusieurs valeurs de k**
+
+### 🔢 Cellule :
+
+```python
+k_vector = np.arange(1, 37, 2)
+...
+clf = KNeighborsClassifier(n_neighbors=k)
+clf.fit(Xa, Ya)
+...
+```
+
+Dans cette section :
+
+* vous testez différentes valeurs de **k** (1, 3, 5, …, 35),
+* pour chaque k :
+
+  * vous entraînez le classifieur kNN,
+  * vous calculez le **taux d’erreur** sur l’ensemble de validation.
+
+Objectif : **trouver le meilleur k**.
+
+---
+
+## **🟦 Partie 8 — Sélection du meilleur k**
+
+### 🔢 Cellule :
+
+```python
+err_min, ind_opt = ...
+k_star = k_vector[ind_opt]
+```
+
+Cette cellule :
+
+* trouve l’erreur minimale,
+* récupère la position du k optimal,
+* détermine la meilleure valeur de k.
+
+---
+
+## **🟦 Partie 9 — Normalisation des données**
+
+### 🔢 Cellule :
+
+```python
+from sklearn.preprocessing import StandardScaler
+Xa_n = sc.transform(Xa)
+Xv_n = sc.transform(Xv)
+```
+
+La normalisation :
+
+* met toutes les variables sur la même échelle (moyenne 0, écart-type 1),
+* est indispensable pour kNN (qui utilise les distances).
+
+Objectif :
+➡️ Vérifier si la normalisation **améliore les résultats**.
+
+---
+
+## **🟦 Partie 10 — Visualisation de l’erreur en fonction de k**
+
+### 🔢 Cellule :
+
+```python
+plt.plot(k_vector, error_val)
+plt.plot(k_star, err_min, 'ro')
+```
+
+Cette cellule :
+
+* dessine la courbe des erreurs pour les différents k,
+* marque en rouge le **k optimal**.
+
+Objectif : **visualiser graphiquement le meilleur modèle**.
+
+---
+
+## **🟦 Partie 11 — Matrice de corrélation**
+
+### 🔢 Cellule :
+
+```python
+sns.heatmap(df.corr(), ...)
+```
+
+Cette partie :
+
+* génère une **heatmap** (carte de chaleur),
+* montre la corrélation entre les variables chimiques du vin.
+
+Objectif : comprendre quelles variables influencent la qualité (alcool, acidité volatile, etc.)
+
+---
+
+
 
