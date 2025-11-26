@@ -123,40 +123,38 @@ Cette cellule installe **ucimlrepo**, une bibliothèque permettant d’accéder 
 
 ### 🔢 Cellule :
 
-```markdown
-Import the dataset
-```
+```from ucimlrepo import fetch_ucirepo
 
-### 🔢 Cellule :
+# fetch dataset
+wine_quality = fetch_ucirepo(id=186)
 
-```python
-from ucimlrepo import fetch_ucirepo
-...
+# data (as pandas dataframes)
+X = wine_quality.data.features
+y = wine_quality.data.targets
+
+# metadata
+print(wine_quality.metadata)
+
+# variable information
 print(wine_quality.variables)
 ```
 
-Cette partie :
 
-* charge le dataset **Wine Quality** depuis UCI (via son ID),
-* affiche des informations sur les variables (caractéristiques chimiques du vin).
-
----
 
 ## **🟦 Partie 3 — Chargement manuel du dataset**
 
 ### 🔢 Cellule :
 
-```markdown
-chargement des données et l'affichage de leur résumé
-```
+```import pandas as pd
+import numpy as np
 
-### 🔢 Cellule :
+link = "http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv"
 
-```python
-df = pd.read_csv(link)
-df.describe()
+df = pd.read_csv(link, header="infer", delimiter=";")
+print("\n========= Dataset summary ========= \n")
 df.info()
-df.head()
+print("\n========= A few first samples ========= \n")
+print(df.head())
 ```
 
 Ici :
@@ -201,7 +199,19 @@ Transformation du problème initial (prédire une note entre 0 et 10) en un prob
 
 * 0 = vin de mauvaise qualité (≤5)
 * 1 = vin de bonne qualité (≥6)
-
+```python
+  import matplotlib.pyplot as plt
+import seaborn as sns
+plt.figure()
+ax = plt.gca()
+sns.boxplot(data=X,orient="v",palette="Set1",width=1.5, notch=True)
+ax.set_xticklabels(ax.get_xticklabels(),rotation=90)
+plt.figure()
+corr = X.corr()
+sns.heatmap(corr)
+```
+<img src="aa.png" style="height:540px;margin-right:393px"/>
+<img src="bb.png" style="height:540px;margin-right:393px"/>
 Très utile pour l’apprentissage supervisé.
 
 ---
@@ -278,7 +288,7 @@ La normalisation :
 
 * met toutes les variables sur la même échelle (moyenne 0, écart-type 1),
 * est indispensable pour kNN (qui utilise les distances).
-
+<img src="ee.png" style="height:540px;margin-right:393px"/>
 Objectif :
 ➡️ Vérifier si la normalisation **améliore les résultats**.
 
@@ -297,6 +307,8 @@ Cette cellule :
 
 * dessine la courbe des erreurs pour les différents k,
 * marque en rouge le **k optimal**.
+
+  <img src="tt.png" style="height:540px;margin-right:393px"/>
 
 Objectif : **visualiser graphiquement le meilleur modèle**.
 
