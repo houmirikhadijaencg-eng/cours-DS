@@ -126,6 +126,7 @@ plt.figure()
 corr = X.corr()
 sns.heatmap(corr)
 ```
+<img src="44.png" style="height:540px;margin-right:393px"/>
 
 ➡️ **Interprétation :**
 Ce code calcule la **matrice de corrélation** entre toutes les colonnes.
@@ -270,4 +271,4 @@ Il permet de visualiser la tendance et de vérifier que le k choisi est cohéren
 
 ➡️ **Interprétation :**
 Un deuxième heatmap plus esthétique est affiché pour mieux interpréter les corrélations entre caractéristiques.
-
+<img src="55.png" style="height:540px;margin-right:393px"/>
