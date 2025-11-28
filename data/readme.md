@@ -8,7 +8,7 @@
 
 ## École Nationale de Commerce et de Gestion (ENCG) - 4ème Année
 
-##Analyse des données relatives aux notes des étudiants aux examens
+## Analyse des données relatives aux notes des étudiants aux examens
 ---
 ## À propos du jeu de données
 
@@ -17,7 +17,6 @@ Les colonnes de cet ensemble de données sont :
 identifiant de l'étudiant, heures d'étude, heures de sommeil, taux de présence, note précédente et note finale.
 
 
- Très bien — voici **une interprétation précise, claire et complète de chaque code**, **cellule par cellule**, pour expliquer *ce que fait* chaque morceau de code et *pourquoi* il est utile.
 
 ---
 
@@ -272,3 +271,14 @@ Il permet de visualiser la tendance et de vérifier que le k choisi est cohéren
 ➡️ **Interprétation :**
 Un deuxième heatmap plus esthétique est affiché pour mieux interpréter les corrélations entre caractéristiques.
 <img src="55.png" style="height:540px;margin-right:393px"/>
+
+
+
+Conclusion
+
+L’étude réalisée dans ce fichier permet d’aboutir à une vision complète et cohérente du processus d’analyse et de modélisation appliqué au jeu de données. À travers les différentes étapes du code, tu as suivi une démarche structurée : chargement des données, exploration statistique, visualisation graphique, traitement des valeurs manquantes, normalisation ou transformation des variables, puis entraînement et évaluation de plusieurs modèles de machine learning.
+
+Les visualisations produites ont permis de mieux comprendre la distribution des variables ainsi que leurs relations, facilitant l’interprétation et la préparation du jeu de données. Les opérations de prétraitement ont contribué à améliorer la qualité des données et la performance des modèles.
+Les algorithmes testés ont montré leur capacité à identifier les tendances essentielles du jeu de données, permettant d’obtenir des prédictions cohérentes et exploitables. Les résultats obtenus démontrent que les choix de préparation et de modélisation sont pertinents, tout en laissant apparaître des marges d’amélioration possibles, notamment via l’ajustement des hyperparamètres ou l’utilisation de modèles plus sophistiqués.
+
+De manière générale, ce travail met en évidence l’importance de chaque étape du pipeline d’analyse, depuis la compréhension des données jusqu’à l’évaluation des modèles. Il constitue une base solide pour approfondir l’étude, comparer d’autres approches ou appliquer la même méthodologie à d’autres jeux de données.
